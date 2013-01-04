@@ -11,7 +11,7 @@
 .table-scroll.on {
   position:relative;
   margin-bottom:30px;
-  width:50%; height:200px /*-- aplicados para este ejemplo en particular --*/;
+  width:80%; height:200px /*-- aplicados para este ejemplo en particular --*/;
 }
 
 .table-scroll.on #mask { height:inherit; width:100%; overflow:hidden; white-space:nowrap; font-size:0; padding-bottom:inherit; padding-right:inherit }
@@ -32,26 +32,10 @@
 .t-row { font-size:0 }
 .t-row div { border:1px solid #999; font-size:11pt; display:inline-block; height:20px; overflow:hidden }
 
-
-
-/* -- PARAMETROS A DEFINIR VIA JAVASCRIPT -- */
-.table-scroll.on {
-  padding-bottom:32px /*-- tomar la altura de la celda incluido padding y borde --*/;
-  padding-right:132px /*-- tomar el ancho de la celda incluido padding y borde --*/
-}
-
-.table-scroll.on #scroll-vertical div {
-  height:672px /*-- tomar la altura de c-right --*/
-}
-.table-scroll.on #scroll-horizontal div {
-  width:1532px /*-- tomar el ancho de c-right --*/;
-}
-
-
 /* ----- ANCHO de CELDAS para este ejemplo ----- */
 .table-scroll.w120 .t-row div { width:120px; padding:5px }
 
 /* ----- ANCHO PARTICULAR de celdas a modo de ejemplo  ----- */
 .w200 { width:200px !important;  }
-.t-body div.w200 { background:#FF9 }
+
 

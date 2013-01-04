@@ -1,27 +1,46 @@
-$(function(){
-  // Para el Scroll VERTICAL
-  $('#scroll-vertical').scroll(function(){
-     $('.vertical').scrollTop($(this).scrollTop());
+(function($) {
+
+  $.fn.stable = function() {
+    var stable = $(this);
+    var top_left_cell = $('.top_left', stable);
+
+    $('#scroll-vertical div', stable).height($('.c-right', stable).height());
+    $('#scroll-horizontal div', stable).width($('.c-right', stable).width());
+
+    stable.css('padding-bottom', top_left_cell.outerHeight());
+    stable.css('padding-right', top_left_cell.outerWidth());
+
+    stable.addClass('on');
+
+    // Para el Scroll VERTICAL
+    $('#scroll-vertical', stable).scroll(function(){
+       $('.vertical', stable).scrollTop($(this).scrollTop());
+    });
+
+    // Para el Scroll HORIZONTAL
+    $('#scroll-horizontal', stable).scroll(function(){
+       $('.horizontal', stable).scrollLeft($(this).scrollLeft());
+    });
+
+    // Para la tabla
+    $('#mask', stable).mousewheel(function(event, delta, deltaX, deltaY) {
+      if (!stable.hasClass('on')) return;
+
+      var newLeft = $('.horizontal', stable).scrollLeft() + 25 * deltaX;
+      var newTop = $('.vertical', stable).scrollTop() - 25 * deltaY;
+
+      $('.horizontal', stable).scrollLeft(newLeft);
+      $('.vertical', stable).scrollTop(newTop);
+
+      $('#scroll-horizontal', stable).scrollLeft(newLeft);
+      $('#scroll-vertical', stable).scrollTop(newTop);
+
+      event.preventDefault();
+    });
+  };
+
+  $(function(){
+    $('.stable').stable();
   });
 
-  // Para el Scroll HORIZONTAL
-  $('#scroll-horizontal').scroll(function(){
-     $('.horizontal').scrollLeft($(this).scrollLeft());
-  });
-
-  // Para la tabla
-  $('#mask').mousewheel(function(event, delta, deltaX, deltaY) {
-    if ($('.table-scroll.on').length == 0) return;
-
-    var newLeft = $('.horizontal').scrollLeft() + 25 * deltaX;
-    var newTop = $('.vertical').scrollTop() - 25 * deltaY;
-
-    $('.horizontal').scrollLeft(newLeft);
-    $('.vertical').scrollTop(newTop);
-
-    $('#scroll-horizontal').scrollLeft(newLeft);
-    $('#scroll-vertical').scrollTop(newTop);
-
-    event.preventDefault();
-  });
-});
+})(jQuery);

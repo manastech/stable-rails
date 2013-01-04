@@ -1,4 +1,4 @@
-.table-scroll.w120.on
+.stable.table-scroll.w120{ html_options }
   #scrollbars
     #scroll-vertical
       %div
@@ -8,20 +8,20 @@
       .c-left
         .t-header
           .t-row
-            %div 
+            %div.top_left{column_html_options[0]}
               = data[0][0]
         .t-body.vertical
           - data.each_with_index do |row, index|
             - next if index == 0
             .t-row
-              %div
+              %div{column_html_options[0]}
                 = row[0]
       .c-right
         .t-header.horizontal
           .t-row
             - data[0].each_with_index do |cell, index|
               - next if index == 0
-              %div
+              %div{column_html_options[index]}
                 = cell
         .t-body.vertical.horizontal
           - data.each_with_index do |row, index|
@@ -29,7 +29,7 @@
             .t-row
               - row.each_with_index do |cell, index|
                 - next if index == 0
-                %div
+                %div{column_html_options[index]}
                   = cell
 
 
