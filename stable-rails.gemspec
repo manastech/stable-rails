@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Martin Scebba", "Brian J. Cardiff"]
   gem.email         = ["mscebba@manas.com.ar", "bcardiff@manas.com.ar"]
   gem.description   = %q{Scrollable table with fixed first row and column.}
-  gem.summary       = %q{Scrollable table with fixed first row and column.}
-  gem.homepage      = ""
+  gem.summary       = %q{Rails gem that allows to easily include scrollable tables.}
+  gem.homepage      = "https://github.com/manastech/stable-rails"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
