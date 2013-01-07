@@ -2,10 +2,10 @@
 
   $.fn.stable = function() {
     var stable = $(this);
-    var top_left_cell = $('.top_left', stable);
+    var top_left_cell = $('.c-left .t-header', stable);
 
     $('#scroll-vertical div', stable).height($('.c-right', stable).height());
-    $('#scroll-horizontal div', stable).width($('.c-right', stable).width());
+    $('#scroll-horizontal div', stable).width($('.c-right', stable).width()+$('.c-left', stable).width());
 
     stable.css('padding-bottom', top_left_cell.outerHeight());
     stable.css('padding-right', top_left_cell.outerWidth());
