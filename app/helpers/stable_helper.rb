@@ -1,13 +1,13 @@
 module StableHelper
 	
-	def stable(html_options = nil)
+	def stable(html_options = {})
 		@builder = STableBuilder.new(self)
 		@builder.table(html_options) do
 			yield
 		end
 	end
 
-	def table(html_options = nil)
+	def table(html_options = {})
 		@builder = TableBuilder.new(self)
 		@builder.table(html_options) do
 			yield
