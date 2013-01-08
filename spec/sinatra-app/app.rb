@@ -7,8 +7,8 @@ require_relative '../../app/helpers/stable_helper'
 include StableHelper
 
 set :assets, Sprockets::Environment.new
-settings.assets.append_path "../../app/assets/javascripts"
-settings.assets.append_path "../../app/assets/stylesheets"
+settings.assets.append_path File.join(File.dirname(__FILE__), "../../app/assets/javascripts")
+settings.assets.append_path File.join(File.dirname(__FILE__), "../../app/assets/stylesheets")
 
 helpers do
   def render(*args)
