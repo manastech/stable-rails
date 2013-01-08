@@ -18,4 +18,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_runtime_dependency 'haml-rails'
+
+  gem.add_development_dependency 'sinatra'
+  gem.add_development_dependency 'sass'
 end
