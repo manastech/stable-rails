@@ -1,15 +1,15 @@
 module StableHelper
 	
-	def stable(html_options = {})
+	def stable(options = {})
 		@builder = STableBuilder.new(self)
-		@builder.table(html_options) do
+		@builder.table(options) do
 			yield
 		end
 	end
 
-	def table(html_options = {})
+	def table(options = {})
 		@builder = TableBuilder.new(self)
-		@builder.table(html_options) do
+		@builder.table(options) do
 			yield
 		end
 	end
@@ -26,6 +26,21 @@ module StableHelper
 
 end
 
+module Enumerable
+	def enum_drop_with_index(count)
+		self.each_with_index do |e, index|
+			next if index < count
+			yield e, index
+		end
+	end
+
+	def enum_drop(count)
+		self.enum_drop_with_index(count) do |e, index|
+			yield e
+		end
+	end
+end
+
 class TableBuilder
 
 	def initialize(context)
@@ -34,8 +49,8 @@ class TableBuilder
 		@column_html_options = []
 	end
 
-	def table(html_options)
-		@context.haml_tag :table, html_options do
+	def table(options)
+		@context.haml_tag :table, options[:html] do
 			yield
 		end
 	end
@@ -68,27 +83,46 @@ class STableBuilder
 		@context = context
 		@data = []
 		@column_html_options = []
+		@row_index = -1
 	end
 
-	def table(html_options)
+	def table(options)
+		options.reverse_merge!({ fixed_rows: 1, html: {} })
+
 		yield
 
 		@context.haml_concat @context.render(:partial => '/stable/stable', 
 			:locals => { 
 				:data => @data, 
-				:html_options => html_options, 
-				:column_html_options => @column_html_options 
+				:options => options
 			}
 		)		
 	end
 
 	def tr
+		@row_index += 1
+		@col_index = -1
+
 		@data << []
 		yield
 	end
 
-	def td(content, options)
-		@column_html_options << (options[:column] || {})
-		@data.last << content
+	def td(content, html_options)
+		@col_index += 1
+
+		# ensure slot for @column_html_options[@col_index]
+		if @col_index >= @column_html_options.size
+			@column_html_options << {}
+		end
+		
+		# if html_options define style for column, override it
+		if c = html_options.delete(:column)
+			@column_html_options[@col_index] = c
+		end
+
+		# merge html_options with column html_options
+		html_options.merge!(@column_html_options[@col_index])
+
+		@data.last << { value: content, html_options: html_options }
 	end
 end

@@ -15,16 +15,33 @@
       - td "#{c}4"
       - td "#{c}5"
 
-- stable do
+- stable fixed_rows: 2 do
   - tr do
     - td 'L\N'
     - td 'Title 1'
     - td 'Title 2'
-    - td 'Title 3'
+    - td 'Title 3', column: { class: 'red' }
     - td 'Title 4'
     - td 'Title 5'
     - td 'Title 6'
     - td 'Title 7'
+  - ('a'..'z').each do |c|
+    - tr do
+      - td "Title #{c}"
+      - td "#{c}1"
+      - td "#{c}2"
+      - td "#{c}3"
+      - td "#{c}4"
+      - td "#{c}5", column: { class: 'blue' }
+      - td "#{c}6"
+      - td "#{c}7"
+
+- stable fixed_rows: 2 do
+  - tr do
+    - td 'L\N'
+    - td 'Title 1', style: 'width: 252px; text-align: center'
+    - td 'Title 3', style: 'width: 252px; text-align: center'
+    - td 'Title 5', style: 'width: 384px; text-align: center'
   - ('a'..'z').each do |c|
     - tr do
       - td "Title #{c}"
