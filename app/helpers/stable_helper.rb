@@ -52,14 +52,17 @@ class STableBuilder
 	end
 
 	def table(options)
-		options.reverse_merge!({ fixed_rows: 1, html: {} })
+		options.reverse_merge!({ fixed_rows: 1 })
+		html_options = options.clone
+		html_options.delete :fixed_rows
 
 		yield
 
 		@context.haml_concat @context.render(:partial => @partial_view, 
 			:locals => { 
 				:data => @data, 
-				:options => options
+				:options => options,
+				:html_options => html_options
 			}
 		)		
 	end

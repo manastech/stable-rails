@@ -38,3 +38,7 @@ get "/stylesheets/:file.css" do
   settings.assets["#{params[:file]}.css"]
 end
 
+get "/stylesheets/:part/:file.css" do
+  content_type "text/css"
+  settings.assets["#{params[:part]}/#{params[:file]}.css"]
+end

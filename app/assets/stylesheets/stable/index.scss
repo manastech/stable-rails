@@ -1,41 +1,7 @@
-/* -- TABLA CON SCROLL APAGADO -- */
-.table-scroll {
-  position:relative;
-  margin:0 auto; /*-- tabla centrada --*/
-  margin-bottom:30px;
-}
-.table-scroll .scroll-vertical { display:none }
-.table-scroll .scroll-horizontal { display:none }
-
-/* -- TABLA CON SCROLL ENCENDIDO -- */
-.table-scroll.on {
-  position:relative;
-  margin-bottom:30px;
-  width:50%; height:200px /*-- aplicados para este ejemplo en particular --*/;
-}
-
-.table-scroll.on .mask { height:inherit; width:100%; overflow:hidden; white-space:nowrap; font-size:0; padding-bottom:inherit; padding-right:inherit }
-.table-scroll .mask { white-space:nowrap; font-size:0; }
-
-.table-scroll.on .scrollbars { position:relative; width:100%; height:inherit; padding-bottom:inherit; padding-right:inherit }
-.table-scroll.on .scroll-vertical { position:absolute; height:100%; width:18px; right:-17px; z-index:100; overflow-y:scroll; display:block }
-.table-scroll.on .scroll-horizontal { position:absolute; height:18px; width:100%; left:0px; bottom:-17px; z-index:100; overflow-x:scroll; display:block }
-.table-scroll.on .scroll-horizontal div { height:1px }
-
-
-/* -- ESTRUCTURA GRAL DE LA TABLA-- */
-.c-left, .c-right { display:inline-block; vertical-align:top; height:inherit }
-.c-right { width:inherit }
+/*
+ *= require stable/common
+ *= require_self
+*/
 
 .t-header { background:#333333; color:#FFFFFF; overflow:hidden }
-.t-body { height:inherit; overflow:hidden }
-.t-row { font-size:0 }
 .t-row div { border:1px solid #999; font-size:11pt; display:inline-block; height:20px; overflow:hidden }
-
-/* ----- ANCHO de CELDAS para este ejemplo ----- */
-.table-scroll.w120 .t-row div { width:120px; padding:5px }
-
-/* ----- ANCHO PARTICULAR de celdas a modo de ejemplo  ----- */
-.w200 { width:200px !important;  }
-
-
