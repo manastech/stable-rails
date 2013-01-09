@@ -1,14 +1,14 @@
 module StableHelper
 	
 	def stable(options = {})
-		@builder = STableBuilder.new(self)
+		@builder = STableBuilder.new(self, '/stable/stable')
 		@builder.table(options) do
 			yield
 		end
 	end
 
 	def table(options = {})
-		@builder = TableBuilder.new(self)
+		@builder = STableBuilder.new(self, '/stable/table')
 		@builder.table(options) do
 			yield
 		end
@@ -20,8 +20,8 @@ module StableHelper
 		end
 	end
 
-	def td(content, options = {})
-		@builder.td content, options
+	def td(content, html_options = {})
+		@builder.td content, html_options
 	end
 
 end
@@ -41,45 +41,10 @@ module Enumerable
 	end
 end
 
-class TableBuilder
-
-	def initialize(context)
-		@context = context
-		@row_index = -1
-		@column_html_options = []
-	end
-
-	def table(options)
-		@context.haml_tag :table, options[:html] do
-			yield
-		end
-	end
-
-	def tr
-		@row_index += 1
-		@col_index = -1
-
-		@context.haml_tag :tr do
-			yield
-		end
-	end
-
-	def td(content, options)
-		@col_index += 1
-
-		if @row_index == 0
-			@column_html_options << (options.delete(:column) || {})
-		end
-
-		@context.haml_tag :td, options.merge(@column_html_options[@col_index]) do
-			@context.haml_concat content
-		end
-	end
-end
-
 class STableBuilder
 
-	def initialize(context)
+	def initialize(context, partial_view)
+		@partial_view =  partial_view
 		@context = context
 		@data = []
 		@column_html_options = []
@@ -91,7 +56,7 @@ class STableBuilder
 
 		yield
 
-		@context.haml_concat @context.render(:partial => '/stable/stable', 
+		@context.haml_concat @context.render(:partial => @partial_view, 
 			:locals => { 
 				:data => @data, 
 				:options => options

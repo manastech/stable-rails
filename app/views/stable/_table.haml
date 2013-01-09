@@ -1,0 +1,6 @@
+%table{ options[:html] }
+  - data.each do |row|
+    %tr
+      - row.each do |cell|
+        %td{ cell[:html_options] }
+          = cell[:value]
