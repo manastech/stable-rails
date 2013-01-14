@@ -1,19 +1,31 @@
-- stable class: 'w120' do
+- stable id: 'foo', class: 'w120' do
   - tr do
     - td 'L\N'
     - td 'Title 1'
-    - td 'Title 2'
+    - td 'Title 2', column: { class: 'm' }
     - td 'Title 3'
-    - td 'Title 4'
+    - td 'Title 4', column: { class: 'm' }
     - td 'Title 5'
+    - td 'Title 6'
+    - td 'Title 7'
+    - td 'Title 8'
+    - td 'Title 9'
   - ('a'..'z').each do |c|
-    - tr do
+    - tr class: "#{'m' if 'abefijk'.include? c}" do
       - td "Title #{c}"
       - td "#{c}1"
       - td "#{c}2"
       - td "#{c}3"
       - td "#{c}4"
       - td "#{c}5"
+      - td "#{c}6"
+      - td "#{c}7"
+      - td "#{c}8"
+      - td "#{c}9"
+
+%button(onclick="$('.m').toggleClass('hidden');$('#foo').stable();") Hide some cells
+%br
+%br
 
 - stable class: 'w120', fixed_rows: 2 do
   - tr do
