@@ -7,25 +7,25 @@
     .mask
       .c-left
         .t-header
-          - (0..options[:fixed_rows]-1).each do |row|
-            .t-row
-              %div{data[row][0][:html_options]}
-                = data[row][0][:value]
+          - (0..options[:fixed_rows]-1).each do |index|
+            .t-row{row_wrapper_html_options[index]}
+              %div{data[index][0][:html_options]}
+                = data[index][0][:value]
         .t-body.vertical
-          - data.enum_drop(options[:fixed_rows]) do |row|
-            .t-row
+          - data.enum_drop_with_index(options[:fixed_rows]) do |row, index|
+            .t-row{row_wrapper_html_options[index]}
               %div{row[0][:html_options]}
                 = row[0][:value]
       .c-right
         .t-header.horizontal
-          - (0..options[:fixed_rows]-1).each do |row|
-            .t-row
-              - data[row].enum_drop(1) do |cell|
+          - (0..options[:fixed_rows]-1).each do |index|
+            .t-row{row_wrapper_html_options[index]}
+              - data[index].enum_drop(1) do |cell|
                 %div{cell[:html_options]}
                   = cell[:value]
         .t-body.vertical.horizontal
-          - data.enum_drop(options[:fixed_rows]) do |row|
-            .t-row
+          - data.enum_drop_with_index(options[:fixed_rows]) do |row, index|
+            .t-row{row_wrapper_html_options[index]}
               - row.enum_drop(1) do |cell|
                 %div{cell[:html_options]}
                   = cell[:value]

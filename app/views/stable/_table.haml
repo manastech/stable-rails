@@ -1,6 +1,6 @@
 %table{ html_options }
-  - data.each do |row|
-    %tr
+  - data.each_with_index do |row, index|
+    %tr{ row_wrapper_html_options[index] }
       - row.each do |cell|
         %td{ cell[:html_options] }
           = cell[:value]

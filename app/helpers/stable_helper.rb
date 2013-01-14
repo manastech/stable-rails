@@ -14,8 +14,8 @@ module StableHelper
 		end
 	end
 
-	def tr
-		@builder.tr do
+	def tr(html_options = {})
+		@builder.tr html_options do
 			yield
 		end
 	end
@@ -24,6 +24,17 @@ module StableHelper
 		@builder.td content, html_options
 	end
 
+	def thead
+		@builder.thead do
+			yield
+		end
+	end
+
+	def tbody
+		@builder.tbody do
+			yield
+		end
+	end
 end
 
 module Enumerable
@@ -48,29 +59,34 @@ class STableBuilder
 		@context = context
 		@data = []
 		@column_html_options = []
+		@row_wrapper_html_options = []
 		@row_index = -1
 	end
 
 	def table(options)
-		options.reverse_merge!({ fixed_rows: 1 })
+		@options = options.reverse_merge!({ fixed_rows: 1 })
 		html_options = options.clone
 		html_options.delete :fixed_rows
 
 		yield
 
+		puts @options.inspect
+
 		@context.haml_concat @context.render(:partial => @partial_view, 
 			:locals => { 
 				:data => @data, 
-				:options => options,
-				:html_options => html_options
+				:options => @options,
+				:html_options => html_options,
+				:row_wrapper_html_options => @row_wrapper_html_options
 			}
 		)		
 	end
 
-	def tr
+	def tr(html_options)
 		@row_index += 1
 		@col_index = -1
 
+		@row_wrapper_html_options << html_options
 		@data << []
 		yield
 	end
@@ -92,5 +108,14 @@ class STableBuilder
 		html_options.merge!(@column_html_options[@col_index])
 
 		@data.last << { value: content, html_options: html_options }
+	end
+
+	def thead
+		yield
+		@options[:fixed_rows] = @row_index + 1
+	end
+
+	def tbody
+		yield
 	end
 end
