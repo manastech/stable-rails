@@ -3,5 +3,15 @@
  *= require_self
 */
 
-.t-header { background:#333333; color:#FFFFFF; overflow:hidden }
-.t-row div { border:1px solid #999; font-size:11pt; display:inline-block; height:20px; overflow:hidden }
+.t-header { 
+  background:#333333; 
+  color:#FFFFFF 
+}
+
+.t-row div { 
+  border-bottom:1px solid #ededed; 
+  font-size:11pt; 
+  line-height:11pt; 
+  height:20px; 
+  padding: 5px; 
+}

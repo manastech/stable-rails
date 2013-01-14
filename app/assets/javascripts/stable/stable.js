@@ -6,10 +6,10 @@
       var top_left_cell = $('.c-left .t-header', stable);
 
       $('.scroll-vertical div', stable).height($('.c-right', stable).height());
-      $('.scroll-horizontal div', stable).width($('.c-right', stable).width()+$('.c-left', stable).width());
+      $('.scroll-horizontal div', stable).width($('.c-right', stable).width()+$('.c-left', stable).width()+15);
 
       stable.css('padding-bottom', top_left_cell.outerHeight());
-      stable.css('padding-right', top_left_cell.outerWidth());
+      stable.css('padding-right', top_left_cell.outerWidth()+15);
 
       stable.addClass('on');
 
