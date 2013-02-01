@@ -70,8 +70,6 @@ class STableBuilder
 
 		yield
 
-		puts @options.inspect
-
 		@context.haml_concat @context.render(:partial => @partial_view, 
 			:locals => { 
 				:data => @data, 
