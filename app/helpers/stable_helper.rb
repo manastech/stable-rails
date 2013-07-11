@@ -1,5 +1,5 @@
 module StableHelper
-	
+
 	def stable(options = {})
 		@builder = STableBuilder.new(self, '/stable/stable')
 		@builder.table(options) do
@@ -64,20 +64,20 @@ class STableBuilder
 	end
 
 	def table(options)
-		@options = options.reverse_merge!({ fixed_rows: 1 })
+		@options = options.reverse_merge!({ fixed_rows: 1, fixed_columns: 1 })
 		html_options = options.clone
 		html_options.delete :fixed_rows
 
 		yield
 
-		@context.haml_concat @context.render(:partial => @partial_view, 
-			:locals => { 
-				:data => @data, 
+		@context.haml_concat @context.render(:partial => @partial_view,
+			:locals => {
+				:data => @data,
 				:options => @options,
 				:html_options => html_options,
 				:row_wrapper_html_options => @row_wrapper_html_options
 			}
-		)		
+		)
 	end
 
 	def tr(html_options)
@@ -96,7 +96,7 @@ class STableBuilder
 		if @col_index >= @column_html_options.size
 			@column_html_options << {}
 		end
-		
+
 		# if html_options define style for column, override it
 		if c = html_options.delete(:column)
 			@column_html_options[@col_index] = c
