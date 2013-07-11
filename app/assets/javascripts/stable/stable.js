@@ -16,14 +16,18 @@
       var top_left_cell = $('.c-left .t-header', stable);
 
       $('.scroll-vertical div', stable).height($('.c-right', stable).height());
-      $('.scroll-horizontal div', stable).width($('.c-right', stable).width()+$('.c-left', stable).width()+15);
-
-      stable.css('padding-bottom', top_left_cell.outerHeight());
-      stable.css('padding-right', top_left_cell.outerWidth()+15);
+      $('.scroll-horizontal div', stable).width($('.c-right', stable).width()+$('.c-left', stable).width());
 
       stable.addClass('on');
 
       if (!initialized) {
+        var fix_table_size = function() {
+          $('.c-right', stable).width(stable.width() - top_left_cell.width());
+          $('.t-body', stable).height(stable.height() - top_left_cell.height());
+        }
+        fix_table_size();
+        $(window).resize(fix_table_size);
+
         // Para el Scroll VERTICAL
         $('.scroll-vertical', stable).scroll(function(){
            $('.vertical', stable).scrollTop($(this).scrollTop());

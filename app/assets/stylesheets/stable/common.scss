@@ -2,6 +2,15 @@
 .table-scroll {
   position:relative;
   margin-bottom:30px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+
+  div {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+  }
 }
 .table-scroll .scroll-vertical { display:none }
 .table-scroll .scroll-horizontal { display:none }
@@ -12,17 +21,17 @@
   margin-bottom:30px;
 }
 
-.table-scroll.on .mask { height:inherit; width:100%; overflow:hidden; white-space:nowrap; font-size:0; padding-bottom:inherit; padding-right:inherit }
+.table-scroll.on .mask { height:inherit; width:100%; overflow:hidden; white-space:nowrap; font-size:0; }
 .table-scroll .mask { white-space:nowrap; font-size:0; }
 
-.table-scroll.on .scrollbars { position:relative; width:100%; height:inherit; padding-bottom:inherit; padding-right:inherit }
+.table-scroll.on .scrollbars { position:relative; width:100%; height:inherit; }
 .table-scroll.on .scroll-vertical { position:absolute; height:100%; width:18px; right:-2px; z-index:100; overflow-y:scroll; display:block }
 .table-scroll.on .scroll-horizontal { position:absolute; height:18px; width:100%; left:0px; bottom:-17px; z-index:100; overflow-x:scroll; display:block }
 .table-scroll.on .scroll-horizontal div { height:1px }
 
 
 /* -- ESTRUCTURA GRAL DE LA TABLA-- */
-.c-left, .c-right { display:inline-block; vertical-align:top; height:inherit }
+.c-left, .c-right { display:inline-block; vertical-align:top; }
 .c-right { width:inherit }
 
 .t-body { height:inherit; overflow:hidden }
